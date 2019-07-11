@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Aelf.Boilerplate.Mainchain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,8 +36,10 @@ namespace AElf.Boilerplate.Launcher
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors(builder => builder
-                .AllowAnyOrigin()
+            app.UseCors(builder => builder.WithOrigins(_configuration["CorsOrigins"]
+                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                .Select(o => o.RemovePostFix("/"))
+                .ToArray())
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()

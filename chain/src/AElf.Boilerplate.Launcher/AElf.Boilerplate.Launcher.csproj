@@ -13,12 +13,41 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AElf.Sdk.CSharp" Version="0.7.1-alpha.1" />
+    <PackageReference Include="AElf.Sdk.CSharp" Version="0.7.2-alpha.1-18088" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="0.15.0" />
     <PackageReference Include="Volo.Abp.Autofac" Version="0.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AElf.Boilerplate.Mainchain\AElf.Boilerplate.Mainchain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ContractMessage Include="..\..\protobuf\acs3.proto">
+      <Link>Protobuf\Proto\acs3.proto</Link>
+    </ContractMessage>
+    <ContractStub Include="..\..\protobuf\acs4.proto">
+      <Link>Protobuf\Proto\acs4.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\aedpos_contract.proto">
+      <Link>Protobuf\Proto\aedpos_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\aedpos_contract_impl.proto">
+      <Link>Protobuf\Proto\aedpos_contract_impl.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\profit_contract.proto">
+      <Link>Protobuf\Proto\profit_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\election_contract.proto">
+      <Link>Protobuf\Proto\election_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\parliament_auth_contract.proto">
+      <Link>Protobuf\Proto\parliament_auth_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\token_contract.proto">
+      <Link>Protobuf\Proto\token_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\vote_contract.proto">
+      <Link>Protobuf\Proto\vote_contract.proto</Link>
+    </ContractStub>
   </ItemGroup>
 </Project>

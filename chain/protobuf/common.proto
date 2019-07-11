@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "AElf";
+option csharp_namespace = "AElf.Common";
 
 message Address
 {

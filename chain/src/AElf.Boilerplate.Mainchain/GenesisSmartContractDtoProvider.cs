@@ -1,20 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
+using AElf.Contracts.Deployer;
+using AElf.Kernel.Consensus.AEDPoS;
+using AElf.Kernel.SmartContract;
 using AElf.OS.Node.Application;
+using AElf.Types;
 using Microsoft.Extensions.Options;
 
-namespace AElf.Blockchains.MainChain
+namespace AElf.Boilerplate.MainChain
 {
     public partial class GenesisSmartContractDtoProvider : IGenesisSmartContractDtoProvider
     {
-        private readonly AElf.Kernel.Consensus.AEDPoS.ConsensusOptions _consensusOptions;
+        private readonly IReadOnlyDictionary<string, byte[]> _codes =
+            ContractsDeployer.GetContractCodes<GenesisSmartContractDtoProvider>();
+        
+        private readonly ConsensusOptions _consensusOptions;
 
-        public GenesisSmartContractDtoProvider(IOptionsSnapshot<AElf.Kernel.Consensus.AEDPoS.ConsensusOptions> consensusOptions)
+        public GenesisSmartContractDtoProvider(IOptionsSnapshot<ConsensusOptions> dposOptions)
         {
-            _consensusOptions = consensusOptions.Value;
+            _consensusOptions = dposOptions.Value;
         }
-
-        public string Symbol { get; } = "ELF";
 
         public IEnumerable<GenesisSmartContractDto> GetGenesisSmartContractDtos(Address zeroContractAddress)
         {
@@ -25,9 +30,8 @@ namespace AElf.Blockchains.MainChain
                 GetGenesisSmartContractDtosForProfit(zeroContractAddress),
                 GetGenesisSmartContractDtosForElection(zeroContractAddress),
                 GetGenesisSmartContractDtosForToken(zeroContractAddress),
+//                GetGenesisSmartContractDtosForResource(zeroContractAddress),
                 GetGenesisSmartContractDtosForConsensus(zeroContractAddress),
-                GetGenesisSmartContractDtosForHelloWorld(zeroContractAddress),
-                GetGenesisSmartContractDtosForBingoGame(zeroContractAddress)
             }.SelectMany(x => x);
         }
     }

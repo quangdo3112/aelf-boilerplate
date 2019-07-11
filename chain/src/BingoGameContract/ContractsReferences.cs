@@ -12,7 +12,7 @@ namespace BingoGameContract
         internal TokenContractContainer.TokenContractReferenceState TokenContract { get; set; }
         internal AEDPoSContractContainer.AEDPoSContractReferenceState ConsensusContract { get; set; }
 
-        public SingletonState<Hash> TokenContractSystemName { get; set; }
-        public SingletonState<Hash> ContractContractSystemName { get; set; }
+        public SingletonState<AElf.Types.Hash> TokenContractSystemName { get; set; }
+        public SingletonState<AElf.Types.Hash> ContractContractSystemName { get; set; }
     }
 }

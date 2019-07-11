@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using AElf;
-using AElf.Blockchains.MainChain;
+using AElf.Boilerplate.MainChain;
 using AElf.Contracts.Genesis;
 using AElf.Database;
 using AElf.Kernel;
+using AElf.Kernel.Consensus;
 using AElf.Kernel.Consensus.AEDPoS;
 using AElf.Kernel.Infrastructure;
 using AElf.Kernel.SmartContract;
@@ -20,6 +21,7 @@ using AElf.OS.Rpc.Wallet;
 using AElf.Runtime.CSharp;
 using AElf.RuntimeSetup;
 using AElf.WebApp.Web;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
@@ -45,7 +47,7 @@ namespace Aelf.Boilerplate.Mainchain
         typeof(RuntimeSetupAElfModule),
         typeof(WebWebAppAElfModule)
     )]
-    public class MainChainModule : AElfModule
+    public class MainChainModule : AElfModule<MainChainModule>
     {
         public ILogger<MainChainModule> Logger { get; set; }
 
@@ -65,22 +67,37 @@ namespace Aelf.Boilerplate.Mainchain
             services.AddKeyValueDbContext<StateKeyValueDbContext>(o => o.UseInMemoryDatabase());
 
             services.AddTransient<IGenesisSmartContractDtoProvider, GenesisSmartContractDtoProvider>();
+//            services.AddTransient<IGenesisSmartContractDtoProvider, GenesisSmartContractDtoProvider>();
+//            services.TryAddSingleton<ISmartContractAddressNameProvider, ConsensusSmartContractAddressNameProvider>();
+//            services.TryAddSingleton<ISmartContractAddressNameProvider, ElectionSmartContractAddressNameProvider>();
+//            services.TryAddSingleton<ISmartContractAddressNameProvider, ProfitSmartContractAddressNameProvider>();
+//            services.TryAddSingleton<ISmartContractAddressNameProvider, TokenSmartContractAddressNameProvider>();
+//            services.TryAddSingleton<ISmartContractAddressNameProvider, VoteSmartContractAddressNameProvider>();
             services.TryAddSingleton<ISmartContractAddressNameProvider, ConsensusSmartContractAddressNameProvider>();
             services.TryAddSingleton<ISmartContractAddressNameProvider, ElectionSmartContractAddressNameProvider>();
+            services.TryAddSingleton<ISmartContractAddressNameProvider, ParliamentAuthSmartContractAddressNameProvider>();
             services.TryAddSingleton<ISmartContractAddressNameProvider, ProfitSmartContractAddressNameProvider>();
+            services.TryAddSingleton<ISmartContractAddressNameProvider, ResourceSmartContractAddressNameProvider>();
+            services.TryAddSingleton<ISmartContractAddressNameProvider, ResourceFeeReceiverSmartContractAddressNameProvider>();
+            services.TryAddSingleton<ISmartContractAddressNameProvider, TokenConverterSmartContractAddressNameProvider>();
             services.TryAddSingleton<ISmartContractAddressNameProvider, TokenSmartContractAddressNameProvider>();
             services.TryAddSingleton<ISmartContractAddressNameProvider, VoteSmartContractAddressNameProvider>();
 
+            var configuration = context.Services.GetConfiguration();
             Configure<ChainOptions>(options =>
             {
                 options.ChainId =
-                    ChainHelpers.ConvertBase58ToChainId(context.Services.GetConfiguration()["ChainId"]);
+                    ChainHelper.ConvertBase58ToChainId(context.Services.GetConfiguration()["ChainId"]);
             });
 
             Configure<HostSmartContractBridgeContextOptions>(options =>
             {
-                options.ContextVariables[ContextVariableDictionary.NativeSymbolName] = Symbol;
+                options.ContextVariables[ContextVariableDictionary.NativeSymbolName] = context.Services
+                    .GetConfiguration().GetValue("TokenInitial:Symbol", "ELF");
             });
+            
+            Configure<ContractOptions>(configuration.GetSection("Contract"));
+            
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

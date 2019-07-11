@@ -4,25 +4,61 @@
     <RootNamespace>Aelf.Boilerplate.Mainchain</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AElf.Contracts.Consensus.AEDPoS" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.WebApp.Application.Chain" IncludeAssets="true" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.WebApp.Application.Net" IncludeAssets="true" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Contracts.MultiToken" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Contracts.Profit" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Contracts.Vote" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Blockchains.BasicBaseChain" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Kernel.Token" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.OS.Core" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.OS.Rpc.ChainController" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.OS.Rpc.Net" Version="0.7.1-alpha.1" />
+    <PackageReference Include="AElf.Contracts.Consensus.AEDPoS" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Contracts.Deployer" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Contracts.Genesis" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.CrossChain.Communication" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.CrossChain.Grpc" Version="0.7.1-alpha.1" />
+    <PackageReference Include="AElf.Kernel.BlockTransactionLimitController" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Kernel.Consensus" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.WebApp.Application.Chain" IncludeAssets="true" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.WebApp.Application.Net" IncludeAssets="true" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Contracts.MultiToken" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Contracts.Profit" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Contracts.Vote" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Blockchains.BasicBaseChain" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Kernel.Token" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.OS.Core" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.OS.Rpc.ChainController" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.OS.Rpc.Net" Version="0.7.2-alpha.1-18088" />
     <PackageReference Include="AElf.OS.Rpc.Wallet" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Runtime.CSharp" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Runtime.CSharp.ExecutiveTokenPlugin" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.RuntimeSetup" Version="0.7.1-alpha.1" />
-    <PackageReference Include="AElf.Sdk.CSharp" Version="0.7.1-alpha.1" />
+    <PackageReference Include="AElf.Runtime.CSharp" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Runtime.CSharp.ExecutiveTokenPlugin" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.RuntimeSetup" Version="0.7.2-alpha.1-18088" />
+    <PackageReference Include="AElf.Sdk.CSharp" Version="0.7.2-alpha.1-18088" />
+    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BingoGameContract\BingoGameContract.csproj" />
     <ProjectReference Include="..\HelloWorldContract\HelloWorldContract.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ContractMessage Include="..\..\protobuf\acs3.proto">
+      <Link>Protobuf\Proto\acs3.proto</Link>
+    </ContractMessage>
+    <ContractStub Include="..\..\protobuf\acs4.proto">
+      <Link>Protobuf\Proto\acs4.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\aedpos_contract.proto">
+      <Link>Protobuf\Proto\aedpos_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\aedpos_contract_impl.proto">
+      <Link>Protobuf\Proto\aedpos_contract_impl.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\profit_contract.proto">
+      <Link>Protobuf\Proto\profit_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\election_contract.proto">
+      <Link>Protobuf\Proto\election_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\parliament_auth_contract.proto">
+      <Link>Protobuf\Proto\parliament_auth_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\token_contract.proto">
+      <Link>Protobuf\Proto\token_contract.proto</Link>
+    </ContractStub>
+    <ContractStub Include="..\..\protobuf\vote_contract.proto">
+      <Link>Protobuf\Proto\vote_contract.proto</Link>
+    </ContractStub>
   </ItemGroup>
 </Project>

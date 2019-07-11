@@ -1,9 +1,11 @@
 using System.IO;
+using Acs0;
 using AElf;
 using AElf.Contracts.Genesis;
 using AElf.Contracts.TestKit;
 using AElf.Kernel;
 using AElf.OS.Node.Application;
+using AElf.Types;
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
 using Volo.Abp.Threading;

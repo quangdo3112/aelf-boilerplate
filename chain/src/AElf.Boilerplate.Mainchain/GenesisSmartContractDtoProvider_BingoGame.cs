@@ -1,22 +1,25 @@
 using System.Collections.Generic;
+using System.Linq;
+using Acs0;
 using AElf;
 using AElf.Kernel;
+using AElf.Kernel.Consensus;
 using AElf.Kernel.Consensus.AEDPoS;
 using AElf.Kernel.Token;
 using AElf.OS.Node.Application;
+using AElf.Types;
 using BingoGameContract;
 
-namespace AElf.Blockchains.MainChain
+namespace AElf.Boilerplate.MainChain
 {
     public partial class GenesisSmartContractDtoProvider
     {
         public IEnumerable<GenesisSmartContractDto> GetGenesisSmartContractDtosForBingoGame(Address zeroContractAddress)
         {
             var l = new List<GenesisSmartContractDto>();
-
-            l.AddGenesisSmartContract<BingoGameContract.BingoGameContract>(
-                Hash.FromString("BingoGameContract"), GenerateBingoGameInitializationCallList());
-
+            l.AddGenesisSmartContract(
+                _codes.Single(kv => kv.Key.Contains("BingoGame")).Value,
+                Hash.FromString("BingoGameContract"), GenerateElectionInitializationCallList());
             return l;
         }
 
